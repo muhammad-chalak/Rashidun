@@ -49,13 +49,14 @@
             margin: 0 auto;
         }
 
-        /* Navigation */
+        /* --- گۆڕانکاری لە بەشی دوگمەکان --- */
         .tabs-container {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* ٢ دانە لە تەنیشت یەک */
             gap: 1rem;
-            padding: 2rem 1rem;
-            flex-wrap: wrap;
+            padding: 2rem;
+            max-width: 800px; /* پانی کۆنتێنەرەکە دیاری دەکەین */
+            margin: 0 auto; /* بۆ ناوەڕاستکردنەوە */
             position: sticky;
             top: 0;
             background: rgba(15, 23, 42, 0.95);
@@ -68,30 +69,41 @@
             background: transparent;
             border: 2px solid var(--primary);
             color: var(--primary);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
+            padding: 1rem;
+            border-radius: 12px; /* کەمێک گۆشەکانمان تیژتر کردەوە */
             font-family: var(--font-main);
             font-weight: bold;
             font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            text-align: center;
+            width: 100%; /* بۆ پڕکردنەوەی خانەکە */
         }
 
         .tab-btn.active, .tab-btn:hover {
             background: var(--primary);
             color: var(--bg-dark);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
         }
+
+        /* لە شاشەی مۆبایلدا با هەر یەک دانە بێت بۆ جوانی */
+        @media (max-width: 600px) {
+            .tabs-container {
+                grid-template-columns: 1fr; /* یەک دانە لە مۆبایل */
+                padding: 1rem;
+            }
+        }
+        /* ---------------------------------- */
 
         /* Content */
         .content-section {
-            display: none; /* Hidden by default */
+            display: none; 
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
         }
 
-        /* This class makes it visible */
         .content-section.active-section {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -180,7 +192,6 @@
     </header>
 
     <div class="tabs-container">
-        <!-- Added explicit IDs to buttons -->
         <button id="btn-abubakr" class="tab-btn" onclick="switchTab('abubakr')">ئەبووبەکری سدیق</button>
         <button id="btn-umar" class="tab-btn" onclick="switchTab('umar')">عومەری کوڕی خەتاب</button>
         <button id="btn-uthman" class="tab-btn" onclick="switchTab('uthman')">عوسمانی کوڕی عەفان</button>
