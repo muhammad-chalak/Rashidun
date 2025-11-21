@@ -4,27 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>چوار خەلیفەی ڕاشیدین | مێژووی زێڕین</title>
-    <!-- بەکارهێنانی فۆنتی Vazirmatn کە زۆر نزیکە لە کوردی و هەموو پیتەکان دەخوێنێتەوە -->
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #d4af37; /* Gold */
-            --primary-hover: #b5952f;
             --bg-dark: #0f172a;
             --bg-card: #1e293b;
             --text-light: #f8fafc;
             --text-gray: #94a3b8;
             --accent: #0ea5e9;
-            /* گۆڕینی فۆنت بۆ Vazirmatn کە پیتە کوردییەکان بە جوانی دەردەخات */
-            --font-main: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            --font-title: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-main: 'Vazirmatn', sans-serif;
         }
 
-        * {
-            box-sizing: border_box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg-dark);
@@ -34,7 +26,7 @@
             overflow-x: hidden;
         }
 
-        /* Header Section */
+        /* Header */
         header {
             text-align: center;
             padding: 4rem 1rem;
@@ -43,24 +35,21 @@
         }
 
         h1 {
-            font-family: var(--font-title);
-            font-size: 3.5rem;
-            font-weight: 900; /* قەڵەوکردنی فۆنتەکە بۆ ئەوەی وەک سەردێڕ دەرکەوێت */
+            font-size: 3rem;
+            font-weight: 900;
             color: var(--primary);
             margin-bottom: 1rem;
             text-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
-            letter-spacing: -1px;
         }
 
         p.subtitle {
             color: var(--text-gray);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             max-width: 600px;
             margin: 0 auto;
-            font-weight: 400;
         }
 
-        /* Navigation Tabs */
+        /* Navigation */
         .tabs-container {
             display: flex;
             justify-content: center;
@@ -83,7 +72,7 @@
             border-radius: 50px;
             font-family: var(--font-main);
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -91,33 +80,44 @@
         .tab-btn.active, .tab-btn:hover {
             background: var(--primary);
             color: var(--bg-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
 
-        /* Content Grid */
+        /* Content */
         .content-section {
-            display: none;
+            display: none; /* Hidden by default */
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
         }
 
-        .content-section.active {
+        /* This class makes it visible */
+        .content-section.active-section {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
+            animation: fadeIn 0.5s ease-in;
         }
 
-        /* Cards Design */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
         .card {
             background: var(--bg-card);
-            border-radius: 20px;
-            padding: 2rem;
+            border-radius: 16px;
+            padding: 1.5rem;
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease;
             overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
         }
 
         .card::before {
@@ -126,82 +126,49 @@
             top: 0;
             right: 0;
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(to left, var(--primary), transparent);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border-color: rgba(212, 175, 55, 0.3);
         }
 
         .card-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 1rem;
+            padding-bottom: 0.5rem;
         }
 
-        .year-badge {
-            background: rgba(212, 175, 55, 0.1);
-            color: var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .age-badge {
-            background: rgba(14, 165, 233, 0.1);
-            color: var(--accent);
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-            font-size: 0.9rem;
-        }
+        .year-badge { color: var(--primary); font-weight: bold; }
+        .age-badge { color: var(--accent); font-size: 0.9rem; }
 
         .card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
             color: #fff;
-            font-family: var(--font-title);
-            font-weight: 700;
         }
 
         .card p {
             color: var(--text-gray);
-            font-size: 1.05rem;
-            line-height: 1.9;
+            font-size: 0.95rem;
+            line-height: 1.7;
         }
 
-        /* Icon for decoration */
         .icon-bg {
             position: absolute;
-            bottom: -20px;
-            left: -20px;
-            font-size: 8rem;
+            bottom: -10px;
+            left: -10px;
+            font-size: 6rem;
             opacity: 0.03;
             color: var(--primary);
-            pointer-events: none;
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .content-section.active { grid-template-columns: 1fr; }
-            .tabs-container { gap: 0.5rem; }
-            .tab-btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
-        }
-
-        /* Footer */
         footer {
             text-align: center;
             padding: 3rem;
-            margin-top: 4rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 3rem;
             color: var(--text-gray);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
     </style>
 </head>
@@ -209,28 +176,26 @@
 
     <header>
         <h1>خەلیفە ڕاشیدەکان</h1>
-        <p class="subtitle">گەشتێک بەناو ژیان و بەسەرهاتی چوار پێشەوای گەورەی ئیسلام لە سەرەتای موسڵمان بوونیانەوە تا کۆچی دواییان.</p>
+        <p class="subtitle">پوختەی ژیانی چوار پێشەوای ئیسلام</p>
     </header>
 
     <div class="tabs-container">
-        <button class="tab-btn active" onclick="showTab('abubakr')">ئەبووبەکری سدیق</button>
-        <button class="tab-btn" onclick="showTab('umar')">عومەری کوڕی خەتاب</button>
-        <button class="tab-btn" onclick="showTab('uthman')">عوسمانی کوڕی عەفان</button>
-        <button class="tab-btn" onclick="showTab('ali')">عەلی کوڕی ئەبی تاڵیب</button>
+        <!-- Added explicit IDs to buttons -->
+        <button id="btn-abubakr" class="tab-btn" onclick="switchTab('abubakr')">ئەبووبەکری سدیق</button>
+        <button id="btn-umar" class="tab-btn" onclick="switchTab('umar')">عومەری کوڕی خەتاب</button>
+        <button id="btn-uthman" class="tab-btn" onclick="switchTab('uthman')">عوسمانی کوڕی عەفان</button>
+        <button id="btn-ali" class="tab-btn" onclick="switchTab('ali')">عەلی کوڕی ئەبی تاڵیب</button>
     </div>
 
-    <main id="main-content">
-        <!-- Content will be injected via JavaScript -->
-    </main>
+    <div id="content-container"></div>
 
     <footer>
-        <p>پرۆجێکتێکی تایبەت بۆ خزمەتی مێژووی ئیسلامی</p>
+        <p>All Rights Reserved © 2025</p>
     </footer>
 
     <script>
-        // Data for all 4 Caliphs (15 cards each)
         const data = {
-            abubakr: [
+             abubakr: [
                 { year: "٥٧٣ ز", age: "٠ ساڵ", title: "لەدایکبوون", desc: "لەدایکبوونی ئەبووبەکر لە شاری مەککە دوای دوو ساڵ و چەند مانگێک لە ساڵی فیل. ناوی عەبدوڵڵایە و لە هۆزی قوڕەیشە." },
                 { year: "٦١٠ ز", age: "٣٧ ساڵ", title: "موسڵمان بوون", desc: "یەکەم پیاوی ئازاد بوو کە باوەڕی بە پەیامی پێغەمبەر (د.خ) هێنا بێ هیچ دوودڵییەک، و دەستبەجێ دەستی کرد بە بانگەواز." },
                 { year: "٦١٣ ز", age: "٤٠ ساڵ", title: "بانگەوازی ئاشکرا", desc: "کاتێک بانگەواز ئاشکرا کرا، ئەبووبەکر یەکێک بوو لە پارێزەرە سەرسەختەکانی پێغەمبەر و ماڵ و سامانەکەی خستە خزمەت ئیسلام." },
@@ -300,23 +265,26 @@
             ]
         };
 
-        function showTab(caliph) {
-            // Update Buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+        function switchTab(caliphName) {
+            // 1. Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
 
-            // Generate Content
-            const mainContent = document.getElementById('main-content');
-            const items = data[caliph];
+            // 2. Add active class to clicked button
+            const activeBtn = document.getElementById('btn-' + caliphName);
+            if(activeBtn) activeBtn.classList.add('active');
+
+            // 3. Generate HTML for cards
+            const container = document.getElementById('content-container');
+            const caliphData = data[caliphName];
             
-            // Create wrapper
-            let html = `<div class="content-section active" id="${caliph}-section">`;
+            let html = `<div class="content-section active-section">`;
             
-            items.forEach((item, index) => {
-                // Alternate animation delay
-                const delay = index * 0.1; 
+            caliphData.forEach((item, index) => {
+                const delay = index * 0.1;
                 html += `
-                    <div class="card" style="animation: fadeIn 0.5s ease-out forwards; animation-delay: ${delay}s; opacity: 0; transform: translateY(20px);">
+                    <div class="card" style="animation-delay: ${delay}s">
                         <div class="icon-bg">☪</div>
                         <div class="card-header">
                             <span class="year-badge">${item.year}</span>
@@ -327,16 +295,16 @@
                     </div>
                 `;
             });
-            
             html += `</div>`;
-            mainContent.innerHTML = html;
+
+            // 4. Insert into DOM
+            container.innerHTML = html;
         }
 
-        // Initialize first tab
-        document.addEventListener('DOMContentLoaded', () => {
-            // Simulate click on first tab to load
-            document.querySelector('.tab-btn').click();
-        });
+        // Automatically load Abu Bakr on page load
+        window.onload = function() {
+            switchTab('abubakr');
+        };
     </script>
 </body>
 </html>
