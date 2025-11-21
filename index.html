@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>چوار خەلیفەی ڕاشیدین | مێژووی زێڕین</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rakkas&family=Nrt:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d4af37; /* Gold */
+            --primary-hover: #b5952f;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-light: #f8fafc;
+            --text-gray: #94a3b8;
+            --accent: #0ea5e9;
+            --font-main: 'Nrt', sans-serif;
+            --font-title: 'Rakkas', serif;
+        }
+
+        * {
+            box-sizing: border_box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--font-main);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(to bottom, #0f172a, #1e293b);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        p.subtitle {
+            color: var(--text-gray);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Navigation Tabs */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem 1rem;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-family: var(--font-main);
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Content Grid */
+        .content-section {
+            display: none;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .content-section.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards Design */
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to left, var(--primary), transparent);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 1rem;
+        }
+
+        .year-badge {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .age-badge {
+            background: rgba(14, 165, 233, 0.1);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            font-family: var(--font-title);
+        }
+
+        .card p {
+            color: var(--text-gray);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Icon for decoration */
+        .icon-bg {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            font-size: 8rem;
+            opacity: 0.03;
+            color: var(--primary);
+            pointer-events: none;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .content-section.active { grid-template-columns: 1fr; }
+            .tabs-container { gap: 0.5rem; }
+            .tab-btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-gray);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>خەلیفە ڕاشیدەکان</h1>
+        <p class="subtitle">گەشتێک بەناو ژیان و بەسەرهاتی چوار پێشەوای گەورەی ئیسلام لە سەرەتای موسڵمان بوونیانەوە تا کۆچی دواییان.</p>
+    </header>
+
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="showTab('abubakr')">ئەبووبەکری سدیق</button>
+        <button class="tab-btn" onclick="showTab('umar')">عومەری کوڕی خەتاب</button>
+        <button class="tab-btn" onclick="showTab('uthman')">عوسمانی کوڕی عەفان</button>
+        <button class="tab-btn" onclick="showTab('ali')">عەلی کوڕی ئەبی تاڵیب</button>
+    </div>
+
+    <main id="main-content">
+        <!-- Content will be injected via JavaScript -->
+    </main>
+
+    <footer>
+        <p>پرۆجێکتێکی تایبەت بۆ خزمەتی مێژووی ئیسلامی</p>
+    </footer>
+
+    <script>
+        // Data for all 4 Caliphs (15 cards each)
+        const data = {
+            abubakr: [
+                { year: "٥٧٣ ز", age: "٠ ساڵ", title: "لەدایکبوون", desc: "لەدایکبوونی ئەبووبەکر لە شاری مەککە دوای دوو ساڵ و چەند مانگێک لە ساڵی فیل. ناوی عەبدوڵڵایە و لە هۆزی قوڕەیشە." },
+                { year: "٦١٠ ز", age: "٣٧ ساڵ", title: "موسڵمان بوون", desc: "یەکەم پیاوی ئازاد بوو کە باوەڕی بە پەیامی پێغەمبەر (د.خ) هێنا بێ هیچ دوودڵییەک، و دەستبەجێ دەستی کرد بە بانگەواز." },
+                { year: "٦١٣ ز", age: "٤٠ ساڵ", title: "بانگەوازی ئاشکرا", desc: "کاتێک بانگەواز ئاشکرا کرا، ئەبووبەکر یەکێک بوو لە پارێزەرە سەرسەختەکانی پێغەمبەر و ماڵ و سامانەکەی خستە خزمەت ئیسلام." },
+                { year: "٦١٥ ز", age: "٤٢ ساڵ", title: "ئازادکردنی کۆیلەکان", desc: "سامانێکی زۆری بەخشی بۆ کڕینەوە و ئازادکردنی ئەو کۆیلە موسڵمانانەی ئەشکەنجە دەدران، لەوانە بیلالی حەبەشی." },
+                { year: "٦٢٠ ز", age: "٤٧ ساڵ", title: "نازناوی سدیق", desc: "لە ڕووداوی ئیسرا و میعراجدا، کاتێک خەڵکی بڕوایان نەدەکرد، ئەو بە تەواوی باوەڕی کرد و نازناوی 'سدیق'ی پێ بەخشرا." },
+                { year: "٦٢٢ ز", age: "٤٩ ساڵ", title: "کۆچی پیرۆز", desc: "یاوەری تایبەتی پێغەمبەر (د.خ) بوو لە کۆچکردن بۆ مەدینە و مانەوەیان لە ئەشکەوتی سەور بۆ سێ شەو." },
+                { year: "٦٢٤ ز", age: "٥١ ساڵ", title: "جەنگی بەدر", desc: "بەشداری جەنگی بەدری کرد و یەکێک بوو لە ڕاوێژکارە سەرەکییەکانی پێغەمبەر لە کاتی جەنگەکەدا." },
+                { year: "٦٢٥ ز", age: "٥٢ ساڵ", title: "جەنگی ئوحود", desc: "لە ڕۆژی سەختی ئوحوددا، کاتێک زۆر کەس پاشەکشەیان کرد، ئەو وەک چیا لە دەوری پێغەمبەر مایەوە و بەرگری لێ کرد." },
+                { year: "٦٢٨ ز", age: "٥٥ ساڵ", title: "ڕێککەوتنامەی حودەیبییە", desc: "لە کاتێکدا زۆرێک لە هاوەڵان نیگەران بوون لە مەرجەکان، ئەبووبەکر بە تەواوی پاڵپشتی بڕیاری پێغەمبەری کرد." },
+                { year: "٦٣٠ ز", age: "٥٧ ساڵ", title: "فەتحی مەککە", desc: "لەگەڵ سوپای ئیسلام چووە ناو مەککە و بەمەش سەرکەوتنی گەورەی ئیسلام تۆمار کرا." },
+                { year: "٦٣١ ز", age: "٥٨ ساڵ", title: "ئیمامی حەج", desc: "پێغەمبەر (د.خ) ئەوی کردە ئەمیر و پێشەوای موسڵمانان بۆ ئەنجامدانی فەریزەی حەج لەو ساڵەدا." },
+                { year: "٦٣٢ ز", age: "٥٩ ساڵ", title: "پێشنوێژی موسڵمانان", desc: "لە کاتی نەخۆشی پێغەمبەردا، تەنها ئەبووبەکر فەرمانی پێکرا کە پێشنوێژی بۆ موسڵمانان بکات." },
+                { year: "٦٣٢ ز", age: "٥٩ ساڵ", title: "بوونی بە خەلیفە", desc: "دوای وەفاتی پێغەمبەر، لە سەقیفەی بەنی ساعدە بەیعەتی پێ درا و بووە یەکەم خەلیفەی ڕاشیدین." },
+                { year: "٦٣٣ ز", age: "٦٠ ساڵ", title: "جەنگەکانی ڕیددە", desc: "هەڵوێستی توندی نواند بەرامبەر ئەوانەی لە ئیسلام پاشگەز بوونەوە و زەکاتیان نەدەدا، و یەکڕیزی دورگەی عەرەبی پاراست." },
+                { year: "٦٣٤ ز", age: "٦١ ساڵ", title: "کۆچی دوایی", desc: "لە ٢٢ی جەمادی دووەم کۆچی دوایی کرد و لە تەنیشت پێغەمبەر (د.خ) بە خاک سپێردرا." }
+            ],
+            umar: [
+                { year: "٥٨٤ ز", age: "٠ ساڵ", title: "لەدایکبوون", desc: "لە مەککە لەدایکبووە، لە هۆزی بەنی عەدی. بەهێز و خاوەن کەسایەتییەکی کاریگەر بوو لە ناو قوڕەیشدا." },
+                { year: "٦١٦ ز", age: "٣٢ ساڵ", title: "موسڵمان بوون", desc: "موسڵمان بوونی بووە مایەی شکۆ بۆ ئیسلام، دوای بیستنی قورئان لە ماڵی خوشکەکەی دڵی نەرم بوو." },
+                { year: "٦٢٢ ز", age: "٣٨ ساڵ", title: "کۆچی ئاشکرا", desc: "بە پێچەوانەی زۆربەی موسڵمانان، بە ئاشکرا و بە بەرچاوی قوڕەیشەوە کۆچی کرد بۆ مەدینە و کەس نەیویرا ڕێگری لێ بکات." },
+                { year: "٦٢٤ ز", age: "٤٠ ساڵ", title: "ڕاوێژکاری جەنگ", desc: "لە جەنگی بەدردا بەشداری کرد و یەکێک بوو لەو کەسانەی ڕاوێژی گرنگی بە پێغەمبەر دەدا دەربارەی دیلەکان." },
+                { year: "٦٢٥ ز", age: "٤١ ساڵ", title: "بەرگری لە ئوحود", desc: "لە جەنگی ئوحوددا بەشداری کرد و ڕۆڵێکی قارەمانانەی بینی لە بەرگریکردن لە پێغەمبەر و موسڵمانان." },
+                { year: "٦٢٧ ز", age: "٤٣ ساڵ", title: "جەنگی خەندەق", desc: "لە غەزای خەندەقدا ڕۆڵی سەرەکی هەبوو لە پاراستنی سەنگەرەکانی مەدینە بەرامبەر هاوپەیمانەکان." },
+                { year: "٦٢٨ ز", age: "٤٤ ساڵ", title: "بەیعەتو ڕیزوان", desc: "لەژێر دارەکەدا بەیعەتی بە پێغەمبەر دا لە حودەیبییە، کە خودا ڕەزامەندی خۆی بۆ ئەو کۆمەڵە دەربڕی." },
+                { year: "٦٣٢ ز", age: "٤٨ ساڵ", title: "پاڵپشتی ئەبووبەکر", desc: "ڕۆڵێکی یەکلاکەرەوەی هەبوو لە ڕۆژی سەقیفەدا بۆ هەڵبژاردنی ئەبووبەکر و ڕێگریکردن لە دوبەرەکی." },
+                { year: "٦٣٤ ز", age: "٥٠ ساڵ", title: "بوونی بە خەلیفە", desc: "بە ڕاسپاردەی ئەبووبەکر و ڕەزامەندی موسڵمانان، بووە دووەم خەلیفەی ڕاشیدین و نازناوی 'ئەمیرول مئومنین'ی وەرگرت." },
+                { year: "٦٣٦ ز", age: "٥٢ ساڵ", title: "جەنگی یەرموک", desc: "سەرکەوتنی گەورەی سوپای ئیسلام بەسەر ڕۆمەکاندا لە شام، کە بووە هۆی کردنەوەی دەرگای فەتحی شام." },
+                { year: "٦٣٧ ز", age: "٥٣ ساڵ", title: "فەتحی قودس", desc: "خۆی سەفەری کرد بۆ فەلەستین بۆ وەرگرتنی کلیلەکانی قودس و بەڵێننامەی ئاشتی بە دانیشتوانەکەی بەخشی." },
+                { year: "٦٣٨ ز", age: "٥٤ ساڵ", title: "ساڵی وشکەساڵی", desc: "لە ساڵی ڕەمادەدا، نمونەی دادگەری نیشاندا، خواردنی گۆشتی لە خۆی قەدەغە کرد تا هەژاران تێر نەبن." },
+                { year: "٦٣٩ ز", age: "٥٥ ساڵ", title: "دامەزراندنی مێژوو", desc: "ساڵی کۆچی پێغەمبەری کردە سەرەتای مێژووی ئیسلامی و دیوانی بۆ تۆمارکردنی ناوی سەربازان و موچە دروستکرد." },
+                { year: "٦٤١ ز", age: "٥٧ ساڵ", title: "فەتحی میسر و فارس", desc: "لە سەردەمی ئەودا سنووری دەوڵەتی ئیسلامی زۆر فراوان بوو، میسر و ئیمپراتۆریەتی فارس فەتح کران." },
+                { year: "٦٤٤ ز", age: "٦٠ ساڵ", title: "شەهیدبوون", desc: "لە کاتی نوێژی بەیانیدا لەلایەن ئەبولولوئی مەجوسییەوە بە خەنجەر لێی درا و دوای سێ ڕۆژ شەهید بوو." }
+            ],
+            uthman: [
+                { year: "٥٧٦ ز", age: "٠ ساڵ", title: "لەدایکبوون", desc: "لەدایکبوونی عوسمان لە مەککە. لە خانەوادەیەکی دەوڵەمەندی بەنی ئومەییە بوو، بە ڕەوشت بەرزی ناسرابوو." },
+                { year: "٦١١ ز", age: "٣٥ ساڵ", title: "موسڵمان بوون", desc: "لە سەرەتای بانگەوازدا لەسەر دەستی ئەبووبەکر موسڵمان بوو، یەکێک بوو لە پێشەنگەکان." },
+                { year: "٦١٥ ز", age: "٣٩ ساڵ", title: "کۆچ بۆ حەبەشە", desc: "لەگەڵ خێزانی (ڕوقییەی کچی پێغەمبەر) کۆچی کرد بۆ حەبەشە بۆ پاراستنی دینەکەی." },
+                { year: "٦٢٢ ز", age: "٤٦ ساڵ", title: "کۆچی مەدینە", desc: "کۆچی کرد بۆ مەدینە و لەوێش بەردەوام بوو لە یارمەتیدانی موسڵمانان بە سامانەکەی." },
+                { year: "٦٢٤ ز", age: "٤٨ ساڵ", title: "هاوسەرگیری دووەم", desc: "دوای وەفاتی ڕوقییە، پێغەمبەر کچەکەی تری (ئوم کەلسوم)ی پێ بەخشی، بۆیە نازناوی 'خاوەنی دوو نوور'ی لێنرا." },
+                { year: "٦٢٥ ز", age: "٤٩ ساڵ", title: "بەشداری غەزاکان", desc: "بەشداری زۆربەی جەنگەکانی کردووە، تەنها بەدر نەبێت کە بە فەرمانی پێغەمبەر لای خێزانە نەخۆشەکەی مایەوە." },
+                { year: "٦٢٧ ز", age: "٥١ ساڵ", title: "کڕینی بیر", desc: "بیری 'ڕوومە'ی لە جولەکەیەک کڕییەوە بە ٢٠ هەزار درهەم و کردی بە وەقف بۆ هەموو موسڵمانان." },
+                { year: "٦٢٨ ز", age: "٥٢ ساڵ", title: "باڵیۆزی حودەیبییە", desc: "پێغەمبەر ناردی بۆ مەککە وەک نوێنەر، دەنگۆی کوشتنی بڵاوبووەوە و بەیعەتی ڕیزوان لەسەر خوێنی ئەو کرا." },
+                { year: "٦٣٠ ز", age: "٥٤ ساڵ", title: "سوپای عوسرە", desc: "لە غەزای تەبوکدا بەشێکی زۆری سوپاکەی بە تەنها خۆی ئامادە کرد و هەزار دیناری بەخشی." },
+                { year: "٦٣٢-٦٤٤", age: "٥٦-٦٨", title: "ڕاوێژکاری خەلیفەکان", desc: "لە سەردەمی ئەبووبەکر و عومەردا، یەکێک بوو لە ڕاوێژکارە هەرە نزیک و متمانەپێکراوەکان." },
+                { year: "٦٤٤ ز", age: "٦٨ ساڵ", title: "بوونی بە خەلیفە", desc: "لە لایەن شورا (ئەنجومەن)ی شەش کەسییەوە هەڵبژێردرا و بووە سێیەم خەلیفەی ڕاشیدین." },
+                { year: "٦٤٦ ز", age: "٧٠ ساڵ", title: "هێزی دەریایی", desc: "یەکەم کەس بوو کە هێزی دەریایی ئیسلامی دروست کرد و دوورگەی قوبرسی پێ فەتح کرا." },
+                { year: "٦٥٠ ز", age: "٧٤ ساڵ", title: "کۆکردنەوەی قورئان", desc: "گەورەترین دەستکەوتی کۆکردنەوەی قورئان بوو لەسەر یەک شێوە خوێندنەوە و بڵاوکردنەوەی بۆ شارەکان." },
+                { year: "٦٥١ ز", age: "٧٥ ساڵ", title: "فراوانبوونی فتوحات", desc: "سنووری دەوڵەت گەیشتە خۆراسان لە ڕۆژهەڵات و باکووری ئەفریقا لە ڕۆژئاوا." },
+                { year: "٦٥٦ ز", age: "٨٠ ساڵ", title: "شەهیدبوون", desc: "لە کاتی خوێندنی قورئاندا لە ناو ماڵەکەی خۆیدا لەلایەن یاخیبووانەوە گەمارۆ درا و شەهید کرا." }
+            ],
+            ali: [
+                { year: "٦٠٠ ز", age: "٠ ساڵ", title: "لەدایکبوون", desc: "لە ناو کەعبەی پیرۆز لە مەککە لەدایکبووە. کوڕی ئەبو تاڵیبی مامی پێغەمبەرە." },
+                { year: "٦١٠ ز", age: "١٠ ساڵ", title: "یەکەم موسڵمان", desc: "یەکەم منداڵ (یان نێرینە) بوو کە باوەڕی بە پێغەمبەر هێنا و لە ماڵی پێغەمبەر پەروەردە بوو." },
+                { year: "٦١٣ ز", age: "١٣ ساڵ", title: "ڕۆژی ئاگادارکردنەوە", desc: "کاتێک پێغەمبەر خزمەکانی کۆکردەوە، تەنها عەلی هەستا و پشتیوانی خۆی بۆ پەیامەکە دەربڕی." },
+                { year: "٦٢٢ ز", age: "٢٢ ساڵ", title: "شەوی هیجرەت", desc: "گیانی خۆی خستە مەترسییەوە و لە جێگەی پێغەمبەر خەوت بۆ ئەوەی پێغەمبەر بتوانێت بە سەلامەتی کۆچ بکات." },
+                { year: "٦٢٤ ز", age: "٢٤ ساڵ", title: "هاوسەرگیری", desc: "هاوسەرگیری لەگەڵ فاتیمەی کچی پێغەمبەر کرد و بووە باوکی حەسەن و حوسێن." },
+                { year: "٦٢٤ ز", age: "٢٤ ساڵ", title: "پاڵەوانی بەدر", desc: "لە جەنگی بەدردا ئازایەتییەکی بێ وێنەی نواند و ژمارەیەکی زۆری لە سەرکردەکانی قوڕەیش کوشت." },
+                { year: "٦٢٥ ز", age: "٢٥ ساڵ", title: "جەنگی ئوحود", desc: "بەرگرییەکی سەختی لە پێغەمبەر کرد و بریندار بوو، دەوترێت شمشێری زولفەقاری لەوێ بەدەست هێنا." },
+                { year: "٦٢٧ ز", age: "٢٧ ساڵ", title: "جەنگی خەندەق", desc: "لەم جەنگەدا عەمری کوڕی عەبدود (پاڵەوانی عەرەب)ی لە ڕووبەڕووبوونەوەیەکدا کوشت." },
+                { year: "٦٢٨ ز", age: "٢٨ ساڵ", title: "فەتحی خەیبەر", desc: "قەڵای خەیبەر کە کەس نەیدەتوانی بیگرێت، لەسەر دەستی ئەو فەتح کرا و دەرگاکەی هەڵکەند." },
+                { year: "٦٣٠ ز", age: "٣٠ ساڵ", title: "شاردنەوەی بتەکان", desc: "لە فەتحی مەککەدا، چووە سەر شانی پێغەمبەر بۆ شکاندنی ئەو بتانەی لەسەر کەعبە دانرابوون." },
+                { year: "٦٣٢ ز", age: "٣٢ ساڵ", title: "غەدیر خوم", desc: "لە گەڕانەوەی حەجی ماڵئاوایی، پێغەمبەر فەرمووی: 'هەرکەس من مەولای بم، عەلیش مەولایەتی'." },
+                { year: "٦٣٢ ز", age: "٣٢ ساڵ", title: "شۆردنی پێغەمبەر", desc: "ئەرکی پیرۆزی شۆردن و کفنکردن و بەخاکسپاردنی پێغەمبەری (د.خ) لە ئەستۆ گرت." },
+                { year: "٦٥٦ ز", age: "٥٦ ساڵ", title: "بوونی بە خەلیفە", desc: "دوای شەهیدبوونی عوسمان، خەڵکی مەدینە لێی کۆبوونەوە و بەیعەتیان پێ دا و بووە چوارەم خەلیفە." },
+                { year: "٦٥٧ ز", age: "٥٧ ساڵ", title: "گواستنەوەی پایتەخت", desc: "ناوەندی خەلافەتی لە مەدینەوە گواستەوە بۆ کوفە بۆ ئەوەی نزیکتر بێت لە ڕووداوەکان." },
+                { year: "٦٦١ ز", age: "٦١ ساڵ", title: "شەهیدبوون", desc: "لە بەیانی ١٩ی ڕەمەزان لە مزگەوتی کوفە لەلایەن ئیبن مولجەمەوە بریندار کرا و دوای دوو ڕۆژ شەهید بوو." }
+            ]
+        };
+
+        function showTab(caliph) {
+            // Update Buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Generate Content
+            const mainContent = document.getElementById('main-content');
+            const items = data[caliph];
+            
+            // Create wrapper
+            let html = `<div class="content-section active" id="${caliph}-section">`;
+            
+            items.forEach((item, index) => {
+                // Alternate animation delay
+                const delay = index * 0.1; 
+                html += `
+                    <div class="card" style="animation: fadeIn 0.5s ease-out forwards; animation-delay: ${delay}s; opacity: 0; transform: translateY(20px);">
+                        <div class="icon-bg">☪</div>
+                        <div class="card-header">
+                            <span class="year-badge">${item.year}</span>
+                            <span class="age-badge">${item.age}</span>
+                        </div>
+                        <h3>${item.title}</h3>
+                        <p>${item.desc}</p>
+                    </div>
+                `;
+            });
+            
+            html += `</div>`;
+            mainContent.innerHTML = html;
+        }
+
+        // Initialize first tab
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simulate click on first tab to load
+            document.querySelector('.tab-btn').click();
+        });
+    </script>
+</body>
+</html>
