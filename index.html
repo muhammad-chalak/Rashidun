@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>چوار خەلیفەی ڕاشیدین | مێژووی زێڕین</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rakkas&family=Nrt:wght@400;700&display=swap" rel="stylesheet">
+    <!-- بەکارهێنانی فۆنتی Vazirmatn کە زۆر نزیکە لە کوردی و هەموو پیتەکان دەخوێنێتەوە -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #d4af37; /* Gold */
@@ -14,8 +15,9 @@
             --text-light: #f8fafc;
             --text-gray: #94a3b8;
             --accent: #0ea5e9;
-            --font-main: 'Nrt', sans-serif;
-            --font-title: 'Rakkas', serif;
+            /* گۆڕینی فۆنت بۆ Vazirmatn کە پیتە کوردییەکان بە جوانی دەردەخات */
+            --font-main: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-title: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         * {
@@ -43,9 +45,11 @@
         h1 {
             font-family: var(--font-title);
             font-size: 3.5rem;
+            font-weight: 900; /* قەڵەوکردنی فۆنتەکە بۆ ئەوەی وەک سەردێڕ دەرکەوێت */
             color: var(--primary);
             margin-bottom: 1rem;
             text-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+            letter-spacing: -1px;
         }
 
         p.subtitle {
@@ -53,6 +57,7 @@
             font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto;
+            font-weight: 400;
         }
 
         /* Navigation Tabs */
@@ -96,18 +101,12 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
-            animation: fadeIn 0.6s ease-in-out;
         }
 
         .content-section.active {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 2rem;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Cards Design */
@@ -164,16 +163,17 @@
         }
 
         .card h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 1rem;
             color: #fff;
             font-family: var(--font-title);
+            font-weight: 700;
         }
 
         .card p {
             color: var(--text-gray);
-            font-size: 1rem;
-            line-height: 1.8;
+            font-size: 1.05rem;
+            line-height: 1.9;
         }
 
         /* Icon for decoration */
